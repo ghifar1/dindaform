@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\FormSurvey;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -25,6 +27,8 @@ class HomeController extends Controller
     public function index()
     {
         $forms = FormSurvey::all();
-        return view('home', ['forms' => $forms]);
+        if(!auth()->user()->is_admin) return view('home', ['forms' => $forms]);
+        $user = User::all()->except(Auth::id());
+        return view('admin', ['users' => $user, 'forms' => $forms]);
     }
 }

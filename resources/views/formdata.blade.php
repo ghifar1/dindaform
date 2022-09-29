@@ -5,7 +5,57 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Tambah data form {{$form->nama_project}}</div>
+                    <div class="card-header">Form {{$form->nama_project}}</div>
+                    <div class="card-body">
+                        <h3>Detail Form</h3>
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <th>
+                                    Nama Proyek
+                                </th>
+                                <td>
+                                    {{$form->nama_project}}
+                                </td>
+                                <th>
+                                    Nama PIC
+                                </th>
+                                <td>
+                                    {{$form->nama_pic}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Nama Surveyor
+                                </th>
+                                <td>
+                                    {{$form->nama_surveyor}}
+                                </td>
+                                <th>
+                                    Nama Sales
+                                </th>
+                                <td>
+                                    {{$form->nama_sales}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Tanggal Survey
+                                </th>
+                                <td>
+                                    {{$form->tgl_survey}}
+                                </td>
+                                <th>
+                                    No Survey
+                                </th>
+                                <td>
+                                    {{$form->no_survey}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                     @if($errs = \Illuminate\Support\Facades\Session::get('error'))
                             <div class="alert alert-danger" role="alert">
 
@@ -20,15 +70,16 @@
                             </div>
 
                     @endif
-                    <div class="col m-2">
-                        <button  data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary" type="submit">Tambah Data</button>
-                    </div>
+                    @if(!\Illuminate\Support\Facades\Auth::user()->is_admin)
+                        <div class="col m-2">
+                            <button  data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary" type="submit">Tambah Data</button>
+                        </div>
+                    @endif
                     <div class="card-body">
                         <table class="table">
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Jenis</th>
                                 <th scope="col">Nama Barang</th>
                                 <th scope="col">Tipe/Merek</th>
                                 <th scope="col">Jumlah</th>
@@ -37,10 +88,15 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($form->formdata as $data)
+                            @foreach($form->formdata->groupBy('jenis_barang') as $key =>$jenis)
+                                <tr>
+                                    <th colspan="6">
+                                        {{$key}}
+                                    </th>
+                                </tr>
+                                @foreach($jenis as $data)
                                 <tr>
                                     <th scope="row">{{$loop->index +1}}</th>
-                                    <td>{{$data->jenis_barang}}</td>
                                     <td>{{$data->nama_barang}}</td>
                                     <td>{{$data->type_merek}}</td>
                                     <td>{{$data->qty}}</td>
@@ -48,6 +104,7 @@
                                     <td>{{$data->keterangan}}</td>
 
                                 </tr>
+                                @endforeach
                             @endforeach
                             </tbody>
                         </table>

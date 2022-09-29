@@ -26,17 +26,13 @@
                                <td>{{$form->nama_project}}</td>
                                <td>{{$form->lokasi}}</td>
                                <td>
-                                   <div class="row">
-                                       <div class="col">
-                                           <a href="{{url('/form/'.$form->id)}}" class="btn btn-primary">tambah data</a>
-                                       </div>
-                                       <div class="col">
-                                           <form method="POST" action="{{url('/form/'.$form->id)}}">
-                                               @csrf
-                                               @method('delete')
-                                               <button type="submit" class="btn btn-danger">hapus</button>
-                                           </form>
-                                       </div>
+                                   <div class="d-flex gap-2">
+                                       <a href="{{url('/form/'.$form->id)}}" class="btn btn-primary">Tambah / lihat data</a>
+                                       <form method="POST" action="{{url('/form/'.$form->id)}}">
+                                           @csrf
+                                           @method('delete')
+                                           <button type="submit" class="btn btn-danger">hapus</button>
+                                       </form>
                                    </div>
                                </td>
                            </tr>
