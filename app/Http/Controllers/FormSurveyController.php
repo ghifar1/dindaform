@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\FormSurvey;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class FormSurveyController extends Controller
@@ -10,6 +11,26 @@ class FormSurveyController extends Controller
     public function index()
     {
         return view('formsurvey');
+    }
+
+    public function stream($id)
+    {
+        $form = FormSurvey::find($id);
+        if(!$form) return redirect()->back();
+        $pdf = Pdf::loadView('formprint', ['form' => $form]);
+        return $pdf->stream('form.pdf');
+
+    }
+
+    public function download($id)
+    {
+       $form = FormSurvey::find($id);
+       if(!$form) return redirect()->back();
+       $pdf = Pdf::loadView('formprint', ['form' => $form]);
+       return $pdf->download();
+
+//        return  view('formprint', ['form' => $form]);
+
     }
 
     public function insert(Request $request)

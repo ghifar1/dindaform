@@ -7,6 +7,10 @@
                 <div class="card">
                     <div class="card-header">Form {{$form->nama_project}}</div>
                     <div class="card-body">
+                        <div class="d-flex gap-2 mb-2">
+                            <a href="{{url('/form/'.$form->id.'/download')}}" class="btn btn-primary">Download</a>
+                            <a href="{{url('/form/'.$form->id.'/print')}}" class="btn btn-primary">Print</a>
+                        </div>
                         <h3>Detail Form</h3>
                         <table class="table">
                             <tbody>

@@ -20,6 +20,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/form', [\App\Http\Controllers\FormSurveyController::class, 'index']);
 Route::post('/form', [\App\Http\Controllers\FormSurveyController::class, 'insert']);
 Route::get('/form/{id}', [\App\Http\Controllers\FormSurveyController::class, 'show']);
+Route::get('/form/{id}/download', [\App\Http\Controllers\FormSurveyController::class, 'download']);
+Route::get('/form/{id}/print', [\App\Http\Controllers\FormSurveyController::class, 'stream']);
 Route::post('/formdata', [\App\Http\Controllers\FormDataController::class, 'insert']);
 Route::delete('/form/{id}', [\App\Http\Controllers\FormSurveyController::class, 'destroy']);
 Route::delete('/formdata/{id}', [\App\Http\Controllers\FormDataController::class, 'destroy']);
