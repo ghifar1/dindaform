@@ -24,3 +24,4 @@ Route::post('/formdata', [\App\Http\Controllers\FormDataController::class, 'inse
 Route::delete('/form/{id}', [\App\Http\Controllers\FormSurveyController::class, 'destroy']);
 Route::delete('/formdata/{id}', [\App\Http\Controllers\FormDataController::class, 'destroy']);
 Route::post('/user', [\App\Http\Controllers\UserController::class, 'insert']);
+Route::delete('/user/{id}', [\App\Http\Controllers\UserController::class, 'delete']);

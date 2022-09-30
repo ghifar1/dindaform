@@ -26,4 +26,13 @@ class UserController extends Controller
 
         return redirect()->back()->with(['success' => true]);
     }
+
+    public function delete($id)
+    {
+        $user = User::find($id);
+        if(!$user) return redirect()->back();
+
+        $user->delete();
+        return redirect()->back();
+    }
 }

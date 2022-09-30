@@ -70,7 +70,7 @@
                                     <td>
                                         <div class="d-flex gap-2">
                                             <a href="{{url('/form/'.$form->id)}}" class="btn btn-primary">lihat data</a>
-                                            <form method="POST" action="{{url('/form/'.$form->id)}}">
+                                            <form method="POST" action="{{url('/user/'.$form->id)}}">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-danger">hapus</button>
